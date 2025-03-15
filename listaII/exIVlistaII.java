@@ -1,5 +1,5 @@
-class OperacaoMat{
-    
+class OperacaoMat {
+
     float operandoI;
     float operandoII;
     int dia;
@@ -7,7 +7,7 @@ class OperacaoMat{
     int ano;
     Usuario usuario;
 
-    public OperacaoMat(float operandoI, float operandoII, int dia, int mes, int ano, Usuario usuario){
+    public OperacaoMat(float operandoI, float operandoII, int dia, int mes, int ano, Usuario usuario) {
         this.operandoI = operandoI;
         this.operandoII = operandoII;
         this.dia = dia;
@@ -16,44 +16,69 @@ class OperacaoMat{
         this.usuario = usuario;
     }
 
-    public void realizarCalulo(int tipoOperacao){
+    public void realizarCalculo(int tipoOperacao) {
 
-        System.out.println("Usuario " + this.usuario.nome + " " + this.dia + "/" + this.mes + "/" + this.ano);
+        System.out.println("Usuário: " + this.usuario.nome);
+        System.out.println("Data: " + this.dia + "/" + this.mes + "/" + this.ano);
 
-        if(tipoOperacao == 1){
-            System.out.println("Resultado " + (this.operandoI + this.operandoII));
-        }else if(tipoOperacao == 2){
-            System.out.println("Resultado " + (this.operandoI - this.operandoII));
-        }else if(tipoOperacao == 3){
-            System.out.println("Resultado " + (this.operandoI * this.operandoII));
-        }else if(tipoOperacao == 4){
-            System.out.println("Resultado " + (this.operandoI / this.operandoII));
-        }else if(tipoOperacao == 5){
-            System.out.println("Resultado " + (Math.pow(this.operandoI, this.operandoII)));
+        float resultado = 0;
+        String tipo = "";
+
+        switch (tipoOperacao) {
+            case 1:
+                resultado = this.operandoI + this.operandoII;
+                tipo = "Soma";
+                break;
+            case 2:
+                resultado = this.operandoI - this.operandoII;
+                tipo = "Subtração";
+                break;
+            case 3:
+                resultado = this.operandoI * this.operandoII;
+                tipo = "Multiplicação";
+                break;
+            case 4:
+                resultado = this.operandoI / this.operandoII;
+                tipo = "Divisão";
+                break;
+            case 5:
+                resultado = this.operandoI % this.operandoII;
+                tipo = "Resto (mod)";
+                break;
+            default:
+                System.out.println("Operação inválida!");
+                return;
         }
+
+        System.out.println("Operação: " + tipo);
+        System.out.println("Resultado: " + resultado);
+        System.out.println("=====================================");
     }
 }
 
-class Usuario{
-    static String nome;
-    int cpf;
+class Usuario {
+    String nome;
+    String cpf;
     int idade;
 
-    Usuario(String nome, int cpf, int idade){
+    Usuario(String nome, String cpf, int idade) {
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
     }
 }
 
-class Main{
-    public static void main(String[] args){
-        Usuario usuario1 = new Usuario("Marcel", 22, 19);
-        OperacaoMat OperacaoMat1 = new OperacaoMat(10,10,17,12,2025,usuario1);
-        OperacaoMat1.realizarCalulo(1);
-        OperacaoMat1.realizarCalulo(2);
-        OperacaoMat1.realizarCalulo(3);
-        OperacaoMat1.realizarCalulo(4);
-        OperacaoMat1.realizarCalulo(5);
+class Main {
+    public static void main(String[] args) {
+
+        Usuario usuario1 = new Usuario("Marcel", "12345678900", 19);
+
+        OperacaoMat operacaoMat1 = new OperacaoMat(10, 10, 17, 12, 2025, usuario1);
+
+        operacaoMat1.realizarCalculo(1); // Soma
+        operacaoMat1.realizarCalculo(2); // Subtração
+        operacaoMat1.realizarCalculo(3); // Multiplicação
+        operacaoMat1.realizarCalculo(4); // Divisão
+        operacaoMat1.realizarCalculo(5); // Mod
     }
 }
